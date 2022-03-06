@@ -7,14 +7,14 @@
 
 import UIKit
 
-class AppsController: BaseListController {
+class AppsController: BaseListController, UICollectionViewDelegateFlowLayout {
     let cellId = "id"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .yellow
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -23,8 +23,12 @@ class AppsController: BaseListController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        cell.backgroundColor = .systemPink
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width, height: 250)
     }
    
 }
