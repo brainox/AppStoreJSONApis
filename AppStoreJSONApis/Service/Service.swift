@@ -36,4 +36,16 @@ class Service {
             }
         }.resume()
     }
+    
+    func fetchApps() {
+        guard let url = URL(string: "https://rss.applemarketingtools.com/api/v2/us/apps/top-free/50/apps.json") else {return}
+        URLSession.shared.dataTask(with: url) { data, response, error  in
+            
+            if let err = error {
+              return
+            }
+            
+            
+        }.resume()
+    }
 }
