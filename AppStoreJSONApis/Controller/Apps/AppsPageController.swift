@@ -25,7 +25,19 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     
     fileprivate func fetchData() {
         print("fetching new data somehow")
-        Service.shared.fetchApps()
+//        Service.shared.fetchAllApps { (AppGroup, err), in
+//            if err = err {
+//
+//            }
+//        }
+        Service.shared.fetchAllApps { (appGroup, err) in
+            if let err = err {
+                print("failed to fetch games")
+                return
+            }
+            
+            print(appGroup?.feed.results)
+        }
     }
     
     // Dequeueing Section Header
