@@ -37,12 +37,22 @@ class Service {
         }.resume()
     }
     
-    func fetchAllApps(completion: @escaping (AppGroup?, Error?) -> ()) {
+    func fetchTopFreeApps(completion: @escaping (AppGroup?, Error?) -> ()) {
+        
+        let topFreeUrl = "https://rss.applemarketingtools.com/api/v2/us/apps/top-free/50/apps.json"
+      
+        fetchAppGroup( urlString: topFreeUrl, completion: completion )
+    }
+    
+    func fetchTopPaidApps(completion: @escaping (AppGroup?, Error?) -> ()) {
         
         let topPaidURL = "https://rss.applemarketingtools.com/api/v2/us/apps/top-paid/50/apps.json"
-        let topFreeUrl = "https://rss.applemarketingtools.com/api/v2/us/apps/top-free/50/apps.json"
-        
-        guard let url = URL(string: topPaidURL) else {return}
+      
+        fetchAppGroup( urlString: topPaidURL, completion: completion )
+    }
+    
+    func fetchAppGroup ( urlString: String, completion: @escaping (AppGroup?, Error?) -> Void ) {
+        guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url) { data, response, error  in
             
             if error != nil {

@@ -23,27 +23,56 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         fetchData()
     }
     
-    var topFreeApps: AppGroup?
+//    var topFreeApps: AppGroup?
     var groups = [AppGroup]()
     
     fileprivate func fetchData() {
-        Service.shared.fetchAllApps { (appGroup, err) in
+        
+        var group1: AppGroup?
+        var group2: AppGroup?
+        
+        //help you sync your data fetches together
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopFreeApps { (appGroup, err) in
+            
+            dispatchGroup.leave()
+            print("Fetch top free apps complete")
             if err != nil {
-                print("failed to fetch games")
+                print("failed to fetch apps")
                 return
             }
             
-            self.topFreeApps = appGroup
+            group1 = appGroup
+        }
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopPaidApps { (appGroup, err) in
             
-            if let group = appGroup {
-                self.groups.append(group)
+            dispatchGroup.leave()
+            print("Fetch top paid apps completion")
+            if err != nil {
+                print("failed to fetch apps")
+                return
+            }
+            
+            group2 = appGroup
+        }
+        
+        //completion
+        dispatchGroup.notify(queue: .main) {
+            print("completed your dispatch group task...")
+            
+            if let group = group1 {
                 self.groups.append(group)
             }
             
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            if let group = group2 {
+                self.groups.append(group)
             }
+            
+            self.collectionView.reloadData()
         }
     }
     
@@ -63,8 +92,11 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? AppsGroupCell else { return UICollectionViewCell() }
-        cell.titleLabel.text = topFreeApps?.feed.title
-        cell.horizontalController.appGroup = topFreeApps
+        let appGroup = self.groups[indexPath.item]
+        
+        
+        cell.titleLabel.text = appGroup.feed.title
+        cell.horizontalController.appGroup = appGroup
         cell.horizontalController.collectionView.reloadData()
         return cell
     }
