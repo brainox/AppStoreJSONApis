@@ -23,20 +23,27 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         fetchData()
     }
     
+    var topFreeApps: AppGroup?
+    var groups = [AppGroup]()
+    
     fileprivate func fetchData() {
-        print("fetching new data somehow")
-//        Service.shared.fetchAllApps { (AppGroup, err), in
-//            if err = err {
-//
-//            }
-//        }
         Service.shared.fetchAllApps { (appGroup, err) in
-            if let err = err {
+            if err != nil {
                 print("failed to fetch games")
                 return
             }
             
-            print(appGroup?.feed.results)
+            self.topFreeApps = appGroup
+            
+            if let group = appGroup {
+                self.groups.append(group)
+                self.groups.append(group)
+            }
+            
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -47,16 +54,18 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 300)
+        return .init(width: view.frame.width, height: 0)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return groups.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? AppsGroupCell else { return UICollectionViewCell() }
+        cell.titleLabel.text = topFreeApps?.feed.title
+        cell.horizontalController.appGroup = topFreeApps
+        cell.horizontalController.collectionView.reloadData()
         return cell
     }
     

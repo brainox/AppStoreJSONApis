@@ -8,7 +8,11 @@
 import UIKit
 
 class AppsHorizontalCotroller: BaseListController, UICollectionViewDelegateFlowLayout {
+    
     let cellId = "cellId"
+    
+    var appGroup: AppGroup?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -21,12 +25,17 @@ class AppsHorizontalCotroller: BaseListController, UICollectionViewDelegateFlowL
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return appGroup?.feed.results.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? AppRowCell else { return UICollectionViewCell() }
         
+        let app = appGroup?.feed.results[indexPath.item]
+        
+        cell.nameLabel.text = app?.name
+        cell.companyLabel.text = app?.artistName
+        cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
         return cell
     }
     
