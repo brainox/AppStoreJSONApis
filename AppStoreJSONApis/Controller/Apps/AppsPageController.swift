@@ -50,7 +50,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         Service.shared.fetchTopFreeApps { (appGroup, err) in
             
             dispatchGroup.leave()
-            print("Fetch top free apps complete")
+            
             if err != nil {
                 print("failed to fetch apps")
                 return
@@ -63,7 +63,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         Service.shared.fetchTopPaidApps { (appGroup, err) in
             
             dispatchGroup.leave()
-            print("Fetch top paid apps completion")
+            
             if err != nil {
                 print("failed to fetch apps")
                 return
@@ -84,7 +84,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         
         //completion
         dispatchGroup.notify(queue: .main) {
-            print("completed your dispatch group task...")
+            
             
             self.activityIndicatorView.stopAnimating()
             

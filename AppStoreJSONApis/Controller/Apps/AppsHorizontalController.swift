@@ -52,5 +52,4 @@ class AppsHorizontalCotroller: HorizontalSnappingController, UICollectionViewDel
         return .init(top: topBottomPading, left: 0, bottom: topBottomPading, right: 0)
     }
     
-   
 }
