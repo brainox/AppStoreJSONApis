@@ -11,6 +11,14 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     let cellId = "id"
     let headerId = "headerId"
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = .black
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -20,10 +28,14 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
 //        collectionView.register(AppsPageHeader.self, forCellWithReuseIdentifier: headerId)
         collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
+       
         fetchData()
     }
     
 //    var topFreeApps: AppGroup?
+    var socialApps = [SocialApp]()
     var groups = [AppGroup]()
     
     fileprivate func fetchData() {
@@ -60,9 +72,21 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
             group2 = appGroup
         }
         
+        dispatchGroup.enter()
+        Service.shared.fetchSocialApps { (apps, err) in
+            dispatchGroup.leave()
+            if err != nil {
+                print("failed to fetch social apps")
+                return
+            }
+            self.socialApps = apps ?? []
+        }
+        
         //completion
         dispatchGroup.notify(queue: .main) {
             print("completed your dispatch group task...")
+            
+            self.activityIndicatorView.stopAnimating()
             
             if let group = group1 {
                 self.groups.append(group)
@@ -78,12 +102,14 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     
     // Dequeueing Section Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! AppsPageHeader
+        header.appsHeaderViewController.socialApps = self.socialApps
+        header.appsHeaderViewController.collectionView.reloadData()
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 0)
+        return .init(width: view.frame.width, height: 300)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
