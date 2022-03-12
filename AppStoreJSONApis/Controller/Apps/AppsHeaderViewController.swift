@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppsHeaderViewController: BaseListController, UICollectionViewDelegateFlowLayout {
+class AppsHeaderViewController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
     var socialApps = [SocialApp]()
@@ -17,10 +17,7 @@ class AppsHeaderViewController: BaseListController, UICollectionViewDelegateFlow
         collectionView.backgroundColor = .white
         
         collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellId)
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

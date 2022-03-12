@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppsHorizontalCotroller: BaseListController, UICollectionViewDelegateFlowLayout {
+class AppsHorizontalCotroller: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
     
@@ -17,11 +17,8 @@ class AppsHorizontalCotroller: BaseListController, UICollectionViewDelegateFlowL
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellId)
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
-    
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
+//        collectionView.isPagingEnabled = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -52,6 +49,8 @@ class AppsHorizontalCotroller: BaseListController, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: topBottomPading, left: 16, bottom: topBottomPading, right: 16)
+        return .init(top: topBottomPading, left: 0, bottom: topBottomPading, right: 0)
     }
+    
+   
 }

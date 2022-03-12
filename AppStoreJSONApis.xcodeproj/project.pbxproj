@@ -14,6 +14,8 @@
 		B4079D27276E32210054B38C /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4079D26276E32210054B38C /* UIView+Layout.swift */; };
 		B4079D29276E39B50054B38C /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4079D28276E39B50054B38C /* VerticalStackView.swift */; };
 		B422C5AB27DC9A4600D68342 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B422C5AA27DC9A4600D68342 /* SocialApp.swift */; };
+		B422C5AD27DCB16900D68342 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B422C5AC27DCB16900D68342 /* HorizontalSnappingController.swift */; };
+		B422C5AF27DCBB2A00D68342 /* BetterSnappingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B422C5AE27DCBB2A00D68342 /* BetterSnappingLayout.swift */; };
 		B475F61327D8000E004F6184 /* AppsPageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F61227D8000E004F6184 /* AppsPageHeader.swift */; };
 		B475F61527D802A4004F6184 /* AppsHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F61427D802A4004F6184 /* AppsHeaderViewController.swift */; };
 		B475F61727D82FF1004F6184 /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F61627D82FF1004F6184 /* AppsHeaderCell.swift */; };
@@ -43,6 +45,8 @@
 		B4079D26276E32210054B38C /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		B4079D28276E39B50054B38C /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		B422C5AA27DC9A4600D68342 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
+		B422C5AC27DCB16900D68342 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
+		B422C5AE27DCBB2A00D68342 /* BetterSnappingLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterSnappingLayout.swift; sourceTree = "<group>"; };
 		B475F61227D8000E004F6184 /* AppsPageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageHeader.swift; sourceTree = "<group>"; };
 		B475F61427D802A4004F6184 /* AppsHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderViewController.swift; sourceTree = "<group>"; };
 		B475F61627D82FF1004F6184 /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 				B49A2B9C27CD737F001C4802 /* Search */,
 				B49A2B9527CD6E64001C4802 /* Apps */,
 				B4FD4C71276DFCDD004D9287 /* BaseTabBarController.swift */,
+				B422C5AC27DCB16900D68342 /* HorizontalSnappingController.swift */,
 				B49A2B9827CD72D8001C4802 /* BaseListController.swift */,
 			);
 			path = Controller;
@@ -104,6 +109,7 @@
 				B4079D26276E32210054B38C /* UIView+Layout.swift */,
 				B4079D28276E39B50054B38C /* VerticalStackView.swift */,
 				B49E6A4027D7DC93007DE36D /* Extensions.swift */,
+				B422C5AE27DCBB2A00D68342 /* BetterSnappingLayout.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -332,10 +338,12 @@
 				B4FD4C5E276DFBDF004D9287 /* AppDelegate.swift in Sources */,
 				B49A2BA127CDA3BB001C4802 /* AppsHorizontalController.swift in Sources */,
 				B49A2B9927CD72D8001C4802 /* BaseListController.swift in Sources */,
+				B422C5AD27DCB16900D68342 /* HorizontalSnappingController.swift in Sources */,
 				B4079D23276E27130054B38C /* SearchResultCell.swift in Sources */,
 				B49A2B9E27CD7DBE001C4802 /* AppsGroupCell.swift in Sources */,
 				B4079D29276E39B50054B38C /* VerticalStackView.swift in Sources */,
 				B475F61727D82FF1004F6184 /* AppsHeaderCell.swift in Sources */,
+				B422C5AF27DCBB2A00D68342 /* BetterSnappingLayout.swift in Sources */,
 				B4079D27276E32210054B38C /* UIView+Layout.swift in Sources */,
 				B4A85FC7277A80BC00AC27BA /* Service.swift in Sources */,
 				B4A85FC4277A5F5700AC27BA /* SearchResult.swift in Sources */,
