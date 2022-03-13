@@ -42,6 +42,7 @@ class Service {
     
     func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping(T?, Error?) -> Void ) {
         guard let url = URL(string: urlString) else {return}
+        
         URLSession.shared.dataTask(with: url) { data, response, error  in
             
             if error != nil {

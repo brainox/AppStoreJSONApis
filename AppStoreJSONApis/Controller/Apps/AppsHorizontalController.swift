@@ -13,6 +13,8 @@ class AppsHorizontalCotroller: HorizontalSnappingController, UICollectionViewDel
     
     var appGroup: AppGroup?
     
+    var didSelectHandler: ((FeedResult) -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -52,4 +54,10 @@ class AppsHorizontalCotroller: HorizontalSnappingController, UICollectionViewDel
         return .init(top: topBottomPading, left: 0, bottom: topBottomPading, right: 0)
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let app = appGroup?.feed.results[indexPath.item] {
+            didSelectHandler?(app)
+        }
+        
+    }
 }
