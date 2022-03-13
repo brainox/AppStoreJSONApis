@@ -13,6 +13,7 @@ class AppDetailController: BaseListController, UICollectionViewDelegateFlowLayou
     
     let detailCellId = "detailCellId"
     let previewCellId = "previewCellId"
+    let reviewCellId = "reviewCellId"
     
     var appId: String! {
         didSet {
@@ -36,11 +37,13 @@ class AppDetailController: BaseListController, UICollectionViewDelegateFlowLayou
         
         collectionView.register(PreviewCell.self, forCellWithReuseIdentifier: previewCellId)
         
+        collectionView.register(ReviewRowCell.self, forCellWithReuseIdentifier: reviewCellId)
+        
         navigationItem.largeTitleDisplayMode = .never
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,23 +51,30 @@ class AppDetailController: BaseListController, UICollectionViewDelegateFlowLayou
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: detailCellId, for: indexPath) as! AppDetailCell
             cell.app = app
             return cell
-        } else {
+        } else if indexPath.item == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: previewCellId, for: indexPath) as! PreviewCell
             cell.previewScreenshotController.app = app
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellId, for: indexPath) as! ReviewRowCell
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var height: CGFloat?
         if indexPath.item == 0 {
             let dummyCell = AppDetailCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 1000))
             dummyCell.app = app
             dummyCell.layoutIfNeeded()
             
             let estimatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
-            return .init(width: view.frame.width, height: estimatedSize.height)
+            height = estimatedSize.height
+        } else if indexPath.item == 1{
+            height = 500
         } else {
-            return .init(width: view.frame.width, height: 500)
+            height = 280
         }
+        return .init(width: view.frame.width, height: height ?? 280)
     }
 }
