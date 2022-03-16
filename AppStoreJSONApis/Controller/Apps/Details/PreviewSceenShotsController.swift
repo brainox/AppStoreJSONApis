@@ -27,7 +27,6 @@ class PreviewSceenShotsController: HorizontalSnappingController, UICollectionVie
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Number of screenshot are : \(app?.screenshotUrls.count )")
         return app?.screenshotUrls.count ?? 0
     }
     

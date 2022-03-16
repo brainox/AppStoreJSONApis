@@ -10,6 +10,7 @@ import UIKit
 
 class AppDetailController: BaseListController, UICollectionViewDelegateFlowLayout {
     var app: Result?
+    var reviews: Reviews?
     
     let detailCellId = "detailCellId"
     let previewCellId = "previewCellId"
@@ -21,6 +22,19 @@ class AppDetailController: BaseListController, UICollectionViewDelegateFlowLayou
             Service.shared.fetchGenericJSONData(urlString: urlString) { [weak self] (result: SearchResult?, err) in
                 let app = result?.results.first
                 self?.app = app
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+            
+            let reviewsUrl = "https://itunes.apple.com/us/rss/customerreviews/page=1/id=\(appId!)/sortby=mostrecent/json?urlDesc=/customerreviews/id=\(appId!)/sortby=mostrecent/json"
+            
+            Service.shared.fetchGenericJSONData(urlString: reviewsUrl) { [weak self] (reviews: Reviews?, err) in
+                if let err = err {
+                    print("failed to decode reviews: ", err)
+                    return
+                }
+                self?.reviews = reviews
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
@@ -57,6 +71,7 @@ class AppDetailController: BaseListController, UICollectionViewDelegateFlowLayou
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellId, for: indexPath) as! ReviewRowCell
+            cell.reviewsController.reviews = self.reviews
             return cell
         }
     }
