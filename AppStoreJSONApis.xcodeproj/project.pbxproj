@@ -29,6 +29,8 @@
 		B475F61727D82FF1004F6184 /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F61627D82FF1004F6184 /* AppsHeaderCell.swift */; };
 		B475F61927D8388D004F6184 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F61827D8388D004F6184 /* AppGroup.swift */; };
 		B493C45427E28C5100549B5A /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493C45327E28C5100549B5A /* Reviews.swift */; };
+		B493C45927E398D400549B5A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493C45827E398D400549B5A /* TodayViewController.swift */; };
+		B493C45B27E39BD100549B5A /* TodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493C45A27E39BD100549B5A /* TodayCell.swift */; };
 		B49A2B9727CD6E7E001C4802 /* AppsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A2B9627CD6E7E001C4802 /* AppsPageController.swift */; };
 		B49A2B9927CD72D8001C4802 /* BaseListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A2B9827CD72D8001C4802 /* BaseListController.swift */; };
 		B49A2B9E27CD7DBE001C4802 /* AppsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A2B9D27CD7DBE001C4802 /* AppsGroupCell.swift */; };
@@ -69,6 +71,8 @@
 		B475F61627D82FF1004F6184 /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
 		B475F61827D8388D004F6184 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		B493C45327E28C5100549B5A /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
+		B493C45827E398D400549B5A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		B493C45A27E39BD100549B5A /* TodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCell.swift; sourceTree = "<group>"; };
 		B49A2B9627CD6E7E001C4802 /* AppsPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageController.swift; sourceTree = "<group>"; };
 		B49A2B9827CD72D8001C4802 /* BaseListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListController.swift; sourceTree = "<group>"; };
 		B49A2B9D27CD7DBE001C4802 /* AppsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsGroupCell.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 		B4079D1F276E213A0054B38C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B493C45527E38EF400549B5A /* Today */,
 				B49A2B9C27CD737F001C4802 /* Search */,
 				B49A2B9527CD6E64001C4802 /* Apps */,
 				B4FD4C71276DFCDD004D9287 /* BaseTabBarController.swift */,
@@ -115,6 +120,7 @@
 		B4079D24276E271C0054B38C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B493C45C27E39BDD00549B5A /* Today */,
 				B49A2B9F27CD7DC3001C4802 /* Apps */,
 				B4079D22276E27130054B38C /* SearchResultCell.swift */,
 			);
@@ -160,6 +166,22 @@
 				B40E758A27DE68DA008A366B /* Preview */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		B493C45527E38EF400549B5A /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				B493C45827E398D400549B5A /* TodayViewController.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		B493C45C27E39BDD00549B5A /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				B493C45A27E39BD100549B5A /* TodayCell.swift */,
+			);
+			path = Today;
 			sourceTree = "<group>";
 		};
 		B49A2B9527CD6E64001C4802 /* Apps */ = {
@@ -387,7 +409,9 @@
 				B49E6A3F27D7D842007DE36D /* AppRowCell.swift in Sources */,
 				B40E758C27DE68FD008A366B /* ReviewRowCell.swift in Sources */,
 				B475F61527D802A4004F6184 /* AppsHeaderViewController.swift in Sources */,
+				B493C45927E398D400549B5A /* TodayViewController.swift in Sources */,
 				B4FD4C5E276DFBDF004D9287 /* AppDelegate.swift in Sources */,
+				B493C45B27E39BD100549B5A /* TodayCell.swift in Sources */,
 				B49A2BA127CDA3BB001C4802 /* AppsHorizontalController.swift in Sources */,
 				B40E758E27DE93EC008A366B /* ReviewsController.swift in Sources */,
 				B49A2B9927CD72D8001C4802 /* BaseListController.swift in Sources */,
