@@ -12,13 +12,37 @@ struct Reviews: Decodable {
 }
 
 struct ReviewFeed: Decodable {
-    let entry: [Entry]
+    var entry: [Entry] = []
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        do {
+            entry = try container.decode([Entry].self, forKey: .entry)
+        } catch {
+            switch error {
+            case DecodingError.typeMismatch(let expectedType, _) where expectedType == [Any].self || expectedType == [Entry].self:
+                let singleEntry = try container.decode(Entry.self, forKey: .entry)
+                entry = [singleEntry]
+            case DecodingError.keyNotFound(_, _):
+                entry = []
+            default:
+                print("error decoding data:", error)
+            }
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case entry
+    }
 }
 
 struct Entry: Decodable {
     let author: Author
-    let title: Label
-    let content: Label
+    let title, content, rating: Label
+    
+    private enum CodingKeys: String, CodingKey {
+        case author, title, content
+        case rating = "im:rating"
+    }
 }
 
 struct Author: Decodable {
