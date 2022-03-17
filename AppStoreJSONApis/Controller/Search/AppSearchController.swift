@@ -81,6 +81,12 @@ class AppSearchController: BaseListController, UICollectionViewDelegateFlowLayou
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appId = appResults[indexPath.item].trackId
+        let appDetailController = AppDetailController(appId: String(appId))
+        navigationController?.pushViewController(appDetailController, animated: true)
+    }
+    
     // CollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: view.frame.width, height: 350)

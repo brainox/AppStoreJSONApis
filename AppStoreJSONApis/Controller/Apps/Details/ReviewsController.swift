@@ -50,3 +50,4 @@ class ReviewsController: HorizontalSnappingController, UICollectionViewDelegateF
         16
     }
 }
+
